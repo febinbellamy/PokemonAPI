@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const port = 3500;
+const PORT = process.env.PORT || 3500;
 const morgan = require("morgan");
 const pokemonRouter = require("./routes/pokemon");
 const ExpressError = require("./utilities/ExpressError");
@@ -18,7 +18,7 @@ app.all("*", (req, res, next) => {
    next(new ExpressError("Page Not Found", 404));
  });
 
-app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
+app.listen(PORT, () => { 
+    console.log(`Server running on port ${PORT}`);
   });
 
