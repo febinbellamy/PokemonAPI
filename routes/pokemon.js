@@ -1,19 +1,60 @@
 const express = require("express");
 const app = express();
-const router = express.Router();
-const data = require('../data');
-let pokemon = data;
+const pokemonRouter = express.Router();
+const pokemon = require("../data");
 
-router.get("/", (req, res) => { // get all available pokemon
+pokemonRouter
+  .route("/")
+  // get all available pokemon
+  .get((req, res) => {
     res.send(pokemon);
-});
+  })
 
-// get single pokemon by ID
-router.get('/:id', (req, res) => {
+  // update all available pokemon
+  .put((req, res) => {
+    res.statusCode = 403;
+    res.send("PUT operation not supported!");
+  })
+
+  // delete all available pokemon
+  .delete((req, res) => {
+    res.statusCode = 403;
+    res.send("DELETE operation not supported!");
+  })
+
+  // create new pokemon
+  .post((req, res) => {
+    res.statusCode = 403;
+    res.send("POST operation not supported!");
+  });
+
+pokemonRouter
+  .route("/:id")
+  // get single pokemon by ID
+  
+  .get((req, res) => {
     console.log(req.params);
     const { id } = req.params;
     const singlePokemon = pokemon.results.find((pokemon) => pokemon.id === id);
     res.send(singlePokemon);
-})
+  })
 
-module.exports = router;
+  // update a single pokemon by ID
+  .put((req, res) => {
+    res.statusCode = 403;
+    res.send("PUT operation not supported!");
+  })
+
+  // delete a single pokemon by ID
+  .delete((req, res) => {
+    res.statusCode = 403;
+    res.send("DELETE operation not supported!");
+  })
+
+  // create a single pokemon
+  .post((req, res) => {
+    res.statusCode = 403;
+    res.send("POST operation not supported!");
+  });
+
+module.exports = pokemonRouter;
